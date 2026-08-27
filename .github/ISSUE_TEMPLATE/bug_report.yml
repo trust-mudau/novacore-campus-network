@@ -1,0 +1,37 @@
+name: Network lab bug
+description: Report incorrect connectivity, addressing, configuration, or documentation
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include the source device, destination, and observed result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen?
+    validations:
+      required: true
+  - type: input
+    id: packet_tracer
+    attributes:
+      label: Packet Tracer version
+      placeholder: 8.2.x
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add relevant show-command output, PDU results, or screenshots. Remove sensitive information first.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks completed
+      options:
+        - label: I checked the VLAN and gateway configuration.
+        - label: I checked the expected result in TEST_PLAN.md.
+        - label: I removed real credentials and sensitive network details.

@@ -27,6 +27,12 @@ NovaCore is a Cisco Packet Tracer-ready campus network design for a three-zone o
 - `TEST_PLAN.md` — expected pass/fail tests and verification commands
 - `configs/` — ready-to-paste IOS configurations and server GUI setup
 - `diagrams/topology.svg` and `diagrams/topology.png` — clean logical topology diagram
+- `docs/TROUBLESHOOTING.md` — symptom-led Packet Tracer fault isolation
+- `CONTRIBUTING.md` — contribution and verification expectations
+
+## Continuous validation
+
+Every pull request runs a lightweight repository check that confirms the required documentation, topology assets, and eight IOS configuration files are present. Packet Tracer behavior still needs the manual checks in `TEST_PLAN.md` because `.pkt` simulation is not available in GitHub Actions.
 
 ## Suggested Packet Tracer devices
 
