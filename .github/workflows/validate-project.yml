@@ -1,0 +1,44 @@
+name: Validate project pack
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check required project files
+        shell: bash
+        run: |
+          set -euo pipefail
+          required_files=(
+            README.md
+            BUILD_GUIDE.md
+            IP_ADDRESSING.md
+            TEST_PLAN.md
+            configs/SERVER_SETUP.md
+            diagrams/topology.png
+            diagrams/topology.svg
+          )
+
+          for file in "${required_files[@]}"; do
+            test -s "$file" || { echo "Missing or empty: $file"; exit 1; }
+          done
+
+          config_count="$(find configs -maxdepth 1 -type f -name '*.cfg' | wc -l | tr -d ' ')"
+          test "$config_count" -eq 8 || {
+            echo "Expected 8 IOS configuration files; found $config_count"
+            exit 1
+          }
+
+          grep -q '^hostname EDGE-R1$' configs/EDGE-R1.cfg
+          grep -q '^router ospf 10$' configs/EDGE-R1.cfg
+          grep -q '^router ospf 10$' configs/CORE-R1.cfg
+          grep -q '^router ospf 10$' configs/CORE-R2.cfg
